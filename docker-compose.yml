@@ -5,10 +5,10 @@ services:
       - NET_ADMIN
     entrypoint: "/gluetun-entrypoint"
     environment:
-      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_COUNTRIES=Netherlands
+      - SERVER_COUNTRIES=${VPN_SERVER_COUNTRIES}
       - FREE_ONLY=on
   go-scraper:
     container_name: go-scraper
