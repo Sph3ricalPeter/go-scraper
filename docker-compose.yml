@@ -1,0 +1,19 @@
+services:
+  vpn:
+    image: qmcgaw/gluetun
+    cap_add:
+      - NET_ADMIN
+    entrypoint: "/gluetun-entrypoint"
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=Netherlands
+      - FREE_ONLY=on
+  go-scraper:
+    container_name: go-scraper
+    build: .
+    network_mode: service:vpn
+    depends_on:
+      vpn:
+        condition: service_healthy
